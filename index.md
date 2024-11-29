@@ -13,15 +13,15 @@ With my dataset found, I turned my attention to the model. I first attempted to 
 
 
 
-<img src = "https://cdn.discordapp.com/attachments/861646157956382750/863124447980290058/unknown.png" width = "300">
-<img src = "https://cdn.discordapp.com/attachments/861646157956382750/863124684966199336/unknown.png" width = "300">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown.png" width = "300">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown-2.png" width = "300">
 
 Clearly, the model hasn't trained properly despite the numbers looking good
 
 
 I then tried a clusttering approach, in which the model uses K Nearest-neighbors (KNN) to group different attributes of an image. This is different from the other models which use image recognition. However, this seemed to create more errors and problems, so I switched back to using a CNN model, but this time decided to use VGG16. In addition, I realized my dataset was extremely small for the task I was trying to achieve. I didn't have the time to manually take photos of objects and classify them. [Thanks to Jason Inirio's google images to dataset tool](https://github.com/jasoninirio/BSE_Toolbox/tree/main/dataset_maker), I was able to quickly add hundreds of images to each label in my dataset. 
 
-<img src = "https://cdn.discordapp.com/attachments/856058763894063114/865272247030775839/unknown.png" width = "600">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown-3.png" width = "600">
 
 ```python
 model = tf.keras.Sequential([
@@ -67,7 +67,7 @@ model.summary()
 
 This was my original model
 
-<img src = "https://cdn.discordapp.com/attachments/856058763894063114/868169390317781022/unknown.png" width = "600">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown-4.png" width = "600">
 
 While there's nothing inherently wrong with my own model or the various pretrained models I used, they don't work very well with small datasets because there simply isn't enough data to train 74 million parameters. Yet, these models didn't work accurately if I only trained the final layers and weights and left the core parameters untrained.
 
@@ -93,21 +93,21 @@ pred = labels[np.argmax(classes)]
 ```
 After training, this code can be used to use our model on images. It takes in the user defined image, a jpg file, and resizes it to the input size of the model. Then, the pixels of the resized image are converted into an array which can be read by the model. The image is then normalized so that all the features are predicted in a range from 0-1 This is fed into the model which outputs a predicted label.
 
-<img src = "https://cdn.discordapp.com/attachments/856058763894063114/865269216885473301/unknown.png" width = "600">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown-5.png" width = "600">
 
-It finally works (well, some of the time)!
+It finally works (well, most of the time)!
 
 
 # Second Milestone
 
-<img src = "https://cdn.discordapp.com/attachments/856058763894063114/863103776180142100/IMG_7216.JPG" width = "800">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/IMG_7216.JPG" width = "800">
 This is the raspberry pi that the final AI model will run on.
 
 My second milestone was to run my model on a raspberry pi 3. While previous rpi's have been very underpowered, the newer models such as the 3 and 4 have gained significant performance gains. So while training still cannot happen on the pi itself (because of the lack of an egpu), the final model CAN run on it, and predictions can be made entirely on device rather than on google colab or a separate device. 
 
 In addition, I once again rebuilt my model. I realized that while it worked well on the test images from my dataset, those images might have been very similar to the training dataset, and had only been classified accurately due to overfitting. I found this out when trying to classify photos I took of hairbrushes and plastic cups and the model making weird predictions.
 
-<img src = "https://cdn.discordapp.com/attachments/856058763894063114/867809699230384159/unknown.png" width = "600">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown-6.png" width = "600">
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -121,7 +121,7 @@ I realized regular computer vision is not the ideal method for material classifi
   
  My final milestone was to get my code running on a web app. The code still runs on the Raspberry Pi, but now has a simple interface in the form of a website, which allows anyone on the web to input an image and get an output prediction.
  
-<img src = "https://cdn.discordapp.com/attachments/856058763894063114/867834822596886538/unknown.png">
+<img src = "https://github.com/singhtejus/Materials-detection-AI/blob/gh-pages/unknown-7.png">
 
 There are 2 blocks to this running website: the server and the client. 
 
